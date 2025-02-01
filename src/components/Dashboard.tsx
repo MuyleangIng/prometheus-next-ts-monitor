@@ -1,22 +1,31 @@
-import { Suspense } from "react"
-import MetricChart from "./MetricChart"
+"use client"
+
+import { Card, Grid, Title } from "@tremor/react"
+import CPUUsageChart from "./CPUUsageChart"
+import MemoryUsageChart from "./MemoryUsageChart"
+import DiskUsageChart from "./DiskUsageChart"
+import NetworkTrafficChart from "./NetworkTrafficChart"
 
 export default function Dashboard() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-      <Suspense fallback={<div>Loading CPU usage...</div>}>
-        <MetricChart title="CPU Usage (%)" query="rate(process_cpu_seconds_total[5m]) * 100" />
-      </Suspense>
-      <Suspense fallback={<div>Loading Memory usage...</div>}>
-        <MetricChart title="Memory Usage (bytes)" query="process_resident_memory_bytes" />
-      </Suspense>
-      <Suspense fallback={<div>Loading HTTP Requests...</div>}>
-        <MetricChart title="HTTP Requests Total" query="prometheus_http_requests_total" />
-      </Suspense>
-      <Suspense fallback={<div>Loading Target Status...</div>}>
-        <MetricChart title="Up Targets" query="up" />
-      </Suspense>
-    </div>
+    <Grid numItems={1} numItemsSm={2} numItemsLg={2} className="gap-4">
+      <Card>
+        <Title>CPU Usage</Title>
+        <CPUUsageChart />
+      </Card>
+      <Card>
+        <Title>Memory Usage</Title>
+        <MemoryUsageChart />
+      </Card>
+      <Card>
+        <Title>Disk Usage</Title>
+        <DiskUsageChart />
+      </Card>
+      <Card>
+        <Title>Network Traffic</Title>
+        <NetworkTrafficChart />
+      </Card>
+    </Grid>
   )
 }
 
