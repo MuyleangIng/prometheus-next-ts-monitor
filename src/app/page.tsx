@@ -1,11 +1,17 @@
-import Dashboard from "../components/Dashboard"
+// src/app/page.tsx
+import { OrderersMetrics } from '@/components/OrderersMetrics';
 
-export default function Home() {
+export default function DashboardPage() {
   return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">System Monitoring Dashboard</h1>
-      <Dashboard />
-    </main>
-  )
+    <div className="p-4 space-y-4">
+      <OrderersMetrics 
+        title="CPU Usage"
+        metricType="cpu"
+      />
+      <OrderersMetrics 
+        title="Memory Usage"
+        metricType="memory"
+      />
+    </div>
+  );
 }
-
